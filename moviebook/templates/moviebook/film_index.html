@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
     {% for film in filmy %}
-       <a href={% url "filmovy_detail" film.id %}> Název: {{film.nazev}} <br> </a>
+       <a href={% url "filmovy_detail" film.id %}> Název: {{film.nazev}} </a><br>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

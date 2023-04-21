@@ -1,4 +1,7 @@
 from django.db import models
+#from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+
+
 
 class Zanr(models.Model):
     nazev_zanru = models.CharField(max_length=80, verbose_name="Žánr")

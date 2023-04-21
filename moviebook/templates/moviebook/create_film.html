@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-    <form method="POST">
-        {% csrf_token %} <!-- Django požaduje ověření proti útoku csrf  -->
-        {{ form }}
-        <input type="submit">
-    </form>
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit">
+</form>
 </body>
 </html>
+{% endblock %}

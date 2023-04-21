@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type = "text/css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Můj web s filmy</title>
+</head>
+<body>
+    <nav>
+        <div class="flex_box">
+            <div class="nav_item"><a href={% url "filmovy_index" %}>Index</a></div>
+            <div class="nav_item"><a href={% url "novy_film" %}>Nový Film</a></div>
+        </div>
+    </nav>
+    <div class="content">
+    {% block content %}
+
+    {% endblock %}
+    </div>
+    <footer>
+        Footer
+    </footer>
+</body>
+</html>
