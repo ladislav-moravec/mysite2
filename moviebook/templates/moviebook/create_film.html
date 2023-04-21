@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %} <!-- Django požaduje ověření proti útoku csrf  -->
+        {{ form }}
+        <input type="submit">
+    </form>
+</body>
+</html>

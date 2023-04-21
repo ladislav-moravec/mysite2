@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    {% for film in filmy %}
+       <a href={% url "filmovy_detail" film.id %}> Název: {{film.nazev}} <br> </a>
+    {% endfor %}
+</body>
+</html>
