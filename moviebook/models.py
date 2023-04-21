@@ -1,6 +1,5 @@
 from django.db import models
-#from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 class Zanr(models.Model):
@@ -10,8 +9,9 @@ class Zanr(models.Model):
         return "Nazev_zanru: {0}".format(self.nazev_zanru)
 
     class Meta:
-        verbose_name="Žánr"
-        verbose_name_plural="Žánry"
+        verbose_name = "Žánr"
+        verbose_name_plural = "Žánry"
+
 
 class Film(models.Model):
     nazev = models.CharField(max_length=200, verbose_name="Název Filmu")
@@ -22,5 +22,49 @@ class Film(models.Model):
         return "Nazev: {0} | Rezie: {1} | Zanr: {2}".format(self.nazev, self.rezie, self.zanr.nazev_zanru)
 
     class Meta:
-        verbose_name="Film"
-        verbose_name_plural="Filmy"
+        verbose_name = "Film"
+        verbose_name_plural = "Filmy"
+
+
+class UzivatelManager(BaseUserManager):
+    # Vytvoří uživatele
+    def create_user(self, email, password):
+        print(self.model)
+        if email and password:
+            user = self.model(email=self.normalize_email(email))
+            user.set_password(password)
+            user.save()
+        return user
+
+    # Vytvoří admina
+    def create_superuser(self, email, password):
+        user = self.create_user(email, password)
+        user.is_admin = True
+        user.save()
+        return user
+
+
+class Uzivatel(AbstractBaseUser):
+    email = models.EmailField(max_length=300, unique=True)
+    is_admin = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "uživatel"
+        verbose_name_plural = "uživatelé"
+
+    objects = UzivatelManager()
+
+    USERNAME_FIELD = "email"
+
+    def __str__(self):
+        return "email: {}".format(self.email)
+
+    @property
+    def is_staff(self):
+        return self.is_admin
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
