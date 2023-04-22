@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.views import generic
 
-from .models import Film
-from .forms import FilmForm  # Nový import
+from .models import Film, Uzivatel
+from .forms import FilmForm, UzivatelForm, LoginForm
+from django.contrib.auth import login, logout, authenticate
+from django.shortcuts import redirect, reverse
 
 
 class FilmIndex(generic.ListView):
@@ -34,3 +36,50 @@ class CreateFilm(generic.edit.CreateView):
         if form.is_valid():
             form.save(commit=True)
         return render(request, self.template_name, {"form": form})
+
+
+class UzivatelViewRegister(generic.edit.CreateView):
+    form_class = UzivatelForm
+    model = Uzivatel
+    template_name = "moviebook/user_form.html"
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            uzivatel = form.save(commit = False)
+            password = form.cleaned_data["password"]
+            uzivatel.set_password(password)
+            uzivatel.save()
+            login(request, uzivatel)
+            return redirect("filmovy_index")
+
+        return render(request, self.template_name, {"form":form})
+
+
+class UzivatelViewLogin(generic.edit.CreateView):
+    form_class = LoginForm
+    template_name = "moviebook/user_form.html"
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {"form": form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            user = authenticate(email = email, password = password)
+            if user:
+                login(request, user)
+                return redirect("filmovy_index")
+        return render(request, self.template_name, {"form": form})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect(reverse("login"))

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django import forms
-from .models import Film, Zanr, Uzivatel, UzivatelManager #Importujeme si modely
+from .models import Film, Zanr, Tag, Uzivatel, UzivatelManager #Importujeme si modely
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
@@ -61,3 +61,4 @@ class UzivatelAdmin(UserAdmin):
 admin.site.register(Film)
 admin.site.register(Zanr)
 admin.site.register(Uzivatel, UzivatelAdmin)
+admin.site.register(Tag)
