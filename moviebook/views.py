@@ -6,6 +6,9 @@ from .forms import FilmForm, UzivatelForm, LoginForm
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import redirect, reverse
 
+from django.contrib import messages
+
+
 
 class FilmIndex(generic.ListView):
     template_name = "moviebook/film_index.html"  # cesta k templatu ze složky templates (je možné sdílet mezi aplikacemi)
@@ -81,5 +84,8 @@ class UzivatelViewLogin(generic.edit.CreateView):
 
 
 def logout_user(request):
-    logout(request)
+    if request.user.is_authenticated:
+        logout(request)
+    else:
+        messages.info(request, "Nemůžeš se odhlásit, pokud nejsi přihlášený.")
     return redirect(reverse("login"))
