@@ -14,7 +14,7 @@ class Zanr(models.Model):
 
 
 class Tag(models.Model):
-    tag_title = models.CharField(max_length = 30, verbose_name="Tagy")
+    tag_title = models.CharField(max_length=30, verbose_name="Tagy")
 
     def __str__(self):
         return self.tag_title
@@ -28,22 +28,19 @@ class Film(models.Model):
     nazev = models.CharField(max_length=200, verbose_name="Název Filmu")
     rezie = models.CharField(max_length=180, verbose_name="Režie")
     zanr = models.ForeignKey(Zanr, on_delete=models.SET_NULL, null=True, verbose_name="Žánr")
-    #Nové
     tagy = models.ManyToManyField(Tag)
 
-    #Nové
     def __init__(self, *args, **kwargs):
         super(Film, self).__init__(*args, **kwargs)
 
     def __str__(self):
-        #Nové
         tags = [i.tag_title for i in self.tagy.all()]
-
-        return "Nazev: {0} | Rezie: {1} | Zanr: {2} | Tagy: {3}".format(self.nazev, self.rezie, self.zanr.nazev_zanru, tags)
+        return "Nazev: {0} | Rezie: {1} | Zanr: {2} | Tagy: {3}".format(self.nazev, self.rezie, self.zanr.nazev_zanru,
+                                                                        tags)
 
     class Meta:
-        verbose_name="Film"
-        verbose_name_plural="Filmy"
+        verbose_name = "Film"
+        verbose_name_plural = "Filmy"
 
 
 class UzivatelManager(BaseUserManager):
@@ -88,5 +85,3 @@ class Uzivatel(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-
-
