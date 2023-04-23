@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
     {% for film in filmy %}
-       <a href={% url "filmovy_detail" film.id %}> Název: {{film.nazev}} </a><br>
+       <a href={% url "klient_detail" klient.id %}> Název: {{klient.nazev}} </a><br>
     {% endfor %}
 {% endblock %}

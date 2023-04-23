@@ -1,11 +1,11 @@
 from django import forms
-from .models import Film, Uzivatel, Tag
+from .models import Klient, Uzivatel, Tag
 
-class FilmForm(forms.ModelForm):
+class KlientForm(forms.ModelForm):
     tagy = forms.ModelMultipleChoiceField(queryset = Tag.objects.all(), required = False)
     class Meta:
-        model = Film
-        fields=["nazev", "rezie", "zanr", "tagy"]
+        model = Klient
+        fields=["klient", "pojistovna", "pojisteni", "tagy"]
 
 
 class UzivatelForm(forms.ModelForm):

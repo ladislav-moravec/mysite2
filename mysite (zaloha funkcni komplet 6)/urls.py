@@ -20,5 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', include("ahoj_svete.urls")),
 	path("calculator_aplikace/", include("calculator.urls")),
-	path("moviebook/", include("moviebook.urls")),
+	path("clientapp/", include("clientapp.urls")),
 ]

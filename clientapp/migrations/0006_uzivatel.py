@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('moviebook', '0005_alter_film_options_alter_zanr_options_and_more'),
+        ('clientapp', '0005_alter_film_options_alter_zanr_options_and_more'),
     ]
 
     operations = [

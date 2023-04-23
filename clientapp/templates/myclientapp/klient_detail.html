@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1> {{ klient.nazev }} <span class="glyphicon glyphicon-erase"></span></h1>
+    <small> Pojišťovna: {{ klient.pojistovna }} </small>
+    <h3> Pojištění: {{klient.pojisteni.nazev_pojisteni}} </h3>
+    Nové Tagy: {% if klient.tagy.all.0 %} {% for tag in klient.tagy.all %} <div class="btn btn-primary">{{tag.tag_title}} </div> {% endfor %} {% else %} <span style="color: red;">Tento klient nemá žádné tagy</span> {% endif %}
+    <hr>
+    <form method="POST">
+        {% csrf_token %}
+
+        {% if user.is_admin %}<button name="edit">Upravit klienta</button><button name="delete">Smazat klienta</button>{% endif %}
+    </form>
+{% endblock %}

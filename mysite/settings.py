@@ -32,9 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'crispy_forms',
-	'moviebook',
-	'calculator',
-	'ahoj_svete',
+	'clientapp',
+    'myclientapp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,6 +128,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "moviebook.Uzivatel"
+AUTH_USER_MODEL = "clientapp.Uzivatel"
 
 

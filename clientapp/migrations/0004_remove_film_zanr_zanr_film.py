@@ -7,17 +7,17 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('moviebook', '0003_remove_zanr_film_film_zanr'),
+        ('clientapp', '0003_remove_zanr_film_film_zanr'),
     ]
 
     operations = [
         migrations.RemoveField(
             model_name='film',
-            name='zanr',
+            name='pojisteni',
         ),
         migrations.AddField(
-            model_name='zanr',
+            model_name='pojisteni',
             name='film',
-            field=models.ForeignKey(default=1, null=True, on_delete=django.db.models.deletion.CASCADE, to='moviebook.film'),
+            field=models.ForeignKey(default=1, null=True, on_delete=django.db.models.deletion.CASCADE, to='clientapp.film'),
         ),
     ]

@@ -7,26 +7,26 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('moviebook', '0004_remove_film_zanr_zanr_film'),
+        ('clientapp', '0004_remove_film_zanr_zanr_film'),
     ]
 
     operations = [
         migrations.AlterModelOptions(
             name='film',
-            options={'verbose_name': 'Film', 'verbose_name_plural': 'Filmy'},
+            options={'verbose_name': 'Klient', 'verbose_name_plural': 'Filmy'},
         ),
         migrations.AlterModelOptions(
-            name='zanr',
+            name='pojisteni',
             options={'verbose_name': 'Žánr', 'verbose_name_plural': 'Žánry'},
         ),
         migrations.RemoveField(
-            model_name='zanr',
+            model_name='pojisteni',
             name='film',
         ),
         migrations.AddField(
             model_name='film',
-            name='zanr',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='moviebook.zanr', verbose_name='Žánr'),
+            name='pojisteni',
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='clientapp.pojisteni', verbose_name='Žánr'),
         ),
         migrations.AlterField(
             model_name='film',
@@ -35,12 +35,12 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='film',
-            name='rezie',
+            name='pojistovna',
             field=models.CharField(max_length=180, verbose_name='Režie'),
         ),
         migrations.AlterField(
-            model_name='zanr',
-            name='nazev_zanru',
+            model_name='pojisteni',
+            name='nazev_pojisteni',
             field=models.CharField(max_length=80, verbose_name='Žánr'),
         ),
     ]
