@@ -10,12 +10,26 @@
     <title>Můj web s filmy</title>
 </head>
 <body>
+    {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == "error" %}
+        <strong><span style="color: #ff564f">Error: {{message}}</span></strong>
+        {% elif message.tags == "info" %}
+        <strong><span style="color: #73E460">Info: {{message}}</span></strong>
+        {% else %}
+        <strong><span style="color: #73E460">Zpáva: {{message}}</span></strong>
+        {% endif %}
+        {% endfor %}
+    {% endif %}
     <div class="text-center">{{request.user.email}}</div>
 
     <nav>
         <div class="flex_box">
             <div class="nav_item"><a href={% url "filmovy_index" %}>Index</a></div>
-            <div class="nav_item"><a href={% url "novy_film" %}>Nový Film</a></div>
+            {% if not user.is_authenticated %}<div class="nav_item"><a href={% url "registrace" %}>Registrace</a></div>{% endif %}
+            {% if not user.is_authenticated %}<div class="nav_item"><a href={% url "login" %}>Login</a></div>{% endif %}
+            {% if user.is_authenticated %}<div class="nav_item"><a href={% url "logout" %}>Logout</a></div>{% endif %}
+            {% if user.is_admin %}<div class="nav_item"><a href={% url "novy_film" %}>Přidat film</a></div>{% endif %}
         </div>
     </nav>
     <div class="content">
